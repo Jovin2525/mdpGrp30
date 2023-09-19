@@ -182,6 +182,44 @@ public class Arena extends AppCompatActivity {
             saveData();
         }
     }
+    private String getDirection(int orientation){
+        if (orientation == 0) {
+            return "N";
+        } else if (orientation == 90) {
+            return "E";
+        } else if (orientation == 180) {
+            return "S";
+        } else if (orientation == 270) {
+            return "W";
+        } else {
+            return "N";
+        }
+    }
+
+    private String getObstacleSend(int xCoord, int yCoordFinal, int rotateOrAdd, String direction, String obstacleNo){
+        String infoToSend= "Error, No Info";
+        switch (rotateOrAdd){
+            case 0: //rotate
+                if(xCoord > 19 || yCoordFinal > 19 || yCoordFinal < 0){
+                    infoToSend = "ROTATE," + obstacleNo + ",Out Of Grid," + direction;
+                }
+                else{
+                    infoToSend = "ROTATE," + obstacleNo + "(" + xCoord + "," + yCoordFinal + ")," + direction;
+                }
+                break;
+            case 1: //add or sub
+                if(xCoord > 19 || yCoordFinal > 19 || yCoordFinal < 0){
+                    infoToSend = "SUB," + obstacleNo;
+                }
+                else{
+                    infoToSend = "ADD," + obstacleNo + ",(" + xCoord + "," + yCoordFinal + ")," + direction;
+                }
+                break;
+            default:
+                break;
+        }
+        return infoToSend;
+    }
 
     /**
      * Initializes obstacles and setup listeners
@@ -215,6 +253,8 @@ public class Arena extends AppCompatActivity {
         };
 
 
+
+
         car.setOnClickListener(view -> {
             car.setRotation((car.getRotation() + 90) % 360);
             updateXYDirText();
@@ -223,18 +263,41 @@ public class Arena extends AppCompatActivity {
         obstacle1.setOnClickListener(view -> {
             obstacle1.setRotation((obstacle1.getRotation() + 90) % 360);
             int orientation = (int) obstacle1.getRotation();
+//            String direction = getDirection(orientation);
+            String infoToSend = "";
+            byte[] bytes = null;
+            int xCoord = (int) (obstacle1.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
+            int yCoord = (int) (obstacle1.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
+            int yCoordFinal = 20 - yCoord;
+
             switch (((orientation / 90) % 4 + 4) % 4) {
                 case 0:
                     obstacle1.setImageResource(Helper.resources.get("o1n"));
+//                    infoToSend = "ROTATE,Obstacle1," + direction;
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle1");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 1:
                     obstacle1.setImageResource(Helper.resources.get("o1e"));
+//                    infoToSend = "ROTATE,Obstacle1," + direction;
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle1");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 2:
                     obstacle1.setImageResource(Helper.resources.get("o1s"));
+//                    infoToSend = "ROTATE,Obstacle1," + direction;
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle1");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 3:
                     obstacle1.setImageResource(Helper.resources.get("o1w"));
+//                    infoToSend = "ROTATE,Obstacle1," + direction;
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle1");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
             }
         });
@@ -242,18 +305,40 @@ public class Arena extends AppCompatActivity {
         obstacle2.setOnClickListener(view -> {
             obstacle2.setRotation((obstacle2.getRotation() + 90) % 360);
             int orientation = (int) obstacle2.getRotation();
+            String infoToSend = "";
+            byte[] bytes = null;
+            int xCoord = (int) (obstacle2.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
+            int yCoord = (int) (obstacle2.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
+            int yCoordFinal = 20 - yCoord;
+
             switch (((orientation / 90) % 4 + 4) % 4) {
                 case 0:
                     obstacle2.setImageResource(Helper.resources.get("o2n"));
+//                    infoToSend = "ROTATE,Obstacle2,N";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle2");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 1:
                     obstacle2.setImageResource(Helper.resources.get("o2e"));
+//                    infoToSend = "ROTATE,Obstacle2,E";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle2");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 2:
                     obstacle2.setImageResource(Helper.resources.get("o2s"));
+//                    infoToSend = "ROTATE,Obstacle2,S";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle2");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 3:
                     obstacle2.setImageResource(Helper.resources.get("o2w"));
+//                    infoToSend = "ROTATE,Obstacle2,W";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle2");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
             }
         });
@@ -261,18 +346,39 @@ public class Arena extends AppCompatActivity {
         obstacle3.setOnClickListener(view -> {
             obstacle3.setRotation((obstacle3.getRotation() + 90) % 360);
             int orientation = (int) obstacle3.getRotation();
+            String infoToSend = "";
+            byte[] bytes = null;
+            int xCoord = (int) (obstacle3.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
+            int yCoord = (int) (obstacle3.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
+            int yCoordFinal = 20 - yCoord;
             switch (((orientation / 90) % 4 + 4) % 4) {
                 case 0:
                     obstacle3.setImageResource(Helper.resources.get("o3n"));
+//                    infoToSend = "ROTATE,Obstacle3,N";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle3");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 1:
                     obstacle3.setImageResource(Helper.resources.get("o3e"));
+//                    infoToSend = "ROTATE,Obstacle3,E";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle3");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 2:
                     obstacle3.setImageResource(Helper.resources.get("o3s"));
+//                    infoToSend = "ROTATE,Obstacle3,S";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle3");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 3:
                     obstacle3.setImageResource(Helper.resources.get("o3w"));
+//                    infoToSend = "ROTATE,Obstacle3,W";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle3");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
             }
         });
@@ -280,18 +386,39 @@ public class Arena extends AppCompatActivity {
         obstacle4.setOnClickListener(view -> {
             obstacle4.setRotation((obstacle4.getRotation() + 90) % 360);
             int orientation = (int) obstacle4.getRotation();
+            String infoToSend = "";
+            byte[] bytes = null;
+            int xCoord = (int) (obstacle4.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
+            int yCoord = (int) (obstacle4.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
+            int yCoordFinal = 20 - yCoord;
             switch (((orientation / 90) % 4 + 4) % 4) {
                 case 0:
                     obstacle4.setImageResource(Helper.resources.get("o4n"));
+//                    infoToSend = "ROTATE,Obstacle4,N";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle4");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 1:
                     obstacle4.setImageResource(Helper.resources.get("o4e"));
+//                    infoToSend = "ROTATE,Obstacle4,E";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle4");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 2:
                     obstacle4.setImageResource(Helper.resources.get("o4s"));
+//                    infoToSend = "ROTATE,Obstacle4,S";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle4");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 3:
                     obstacle4.setImageResource(Helper.resources.get("o4w"));
+//                    infoToSend = "ROTATE,Obstacle4,W";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle4");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
             }
         });
@@ -299,18 +426,39 @@ public class Arena extends AppCompatActivity {
         obstacle5.setOnClickListener(view -> {
             obstacle5.setRotation((obstacle5.getRotation() + 90) % 360);
             int orientation = (int) obstacle5.getRotation();
+            String infoToSend = "";
+            byte[] bytes = null;
+            int xCoord = (int) (obstacle5.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
+            int yCoord = (int) (obstacle5.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
+            int yCoordFinal = 20 - yCoord;
             switch (((orientation / 90) % 4 + 4) % 4) {
                 case 0:
                     obstacle5.setImageResource(Helper.resources.get("o5n"));
+//                    infoToSend = "ROTATE,Obstacle5,N";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle5");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 1:
                     obstacle5.setImageResource(Helper.resources.get("o5e"));
+//                    infoToSend = "ROTATE,Obstacle5,E";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle5");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 2:
                     obstacle5.setImageResource(Helper.resources.get("o5s"));
+//                    infoToSend = "ROTATE,Obstacle5,S";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle5");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 3:
                     obstacle5.setImageResource(Helper.resources.get("o5w"));
+//                    infoToSend = "ROTATE,Obstacle5,W";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle5");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
             }
         });
@@ -318,18 +466,39 @@ public class Arena extends AppCompatActivity {
         obstacle6.setOnClickListener(view -> {
             obstacle6.setRotation((obstacle6.getRotation() + 90) % 360);
             int orientation = (int) obstacle6.getRotation();
+            String infoToSend = "";
+            byte[] bytes = null;
+            int xCoord = (int) (obstacle6.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
+            int yCoord = (int) (obstacle6.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
+            int yCoordFinal = 20 - yCoord;
             switch (((orientation / 90) % 4 + 4) % 4) {
                 case 0:
                     obstacle6.setImageResource(Helper.resources.get("o6n"));
+//                    infoToSend = "ROTATE,Obstacle6,N";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle6");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 1:
                     obstacle6.setImageResource(Helper.resources.get("o6e"));
+//                    infoToSend = "ROTATE,Obstacle6,E";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle6");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 2:
                     obstacle6.setImageResource(Helper.resources.get("o6s"));
+//                    infoToSend = "ROTATE,Obstacle6,S";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle6");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 3:
                     obstacle6.setImageResource(Helper.resources.get("o6w"));
+//                    infoToSend = "ROTATE,Obstacle6,W";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle6");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
             }
         });
@@ -337,18 +506,39 @@ public class Arena extends AppCompatActivity {
         obstacle7.setOnClickListener(view -> {
             obstacle7.setRotation((obstacle7.getRotation() + 90) % 360);
             int orientation = (int) obstacle7.getRotation();
+            String infoToSend = "";
+            byte[] bytes = null;
+            int xCoord = (int) (obstacle7.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
+            int yCoord = (int) (obstacle7.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
+            int yCoordFinal = 20 - yCoord;
             switch (((orientation / 90) % 4 + 4) % 4) {
                 case 0:
                     obstacle7.setImageResource(Helper.resources.get("o7n"));
+//                    infoToSend = "ROTATE,Obstacle7,N";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle7");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 1:
                     obstacle7.setImageResource(Helper.resources.get("o7e"));
+//                    infoToSend = "ROTATE,Obstacle7,E";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle7");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 2:
                     obstacle7.setImageResource(Helper.resources.get("o7s"));
+//                    infoToSend = "ROTATE,Obstacle7,S";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle7");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 3:
                     obstacle7.setImageResource(Helper.resources.get("o7w"));
+//                    infoToSend = "ROTATE,Obstacle7,W";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle7");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
             }
         });
@@ -356,18 +546,39 @@ public class Arena extends AppCompatActivity {
         obstacle8.setOnClickListener(view -> {
             obstacle8.setRotation((obstacle8.getRotation() + 90) % 360);
             int orientation = (int) obstacle8.getRotation();
+            String infoToSend = "";
+            byte[] bytes = null;
+            int xCoord = (int) (obstacle8.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
+            int yCoord = (int) (obstacle8.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
+            int yCoordFinal = 20 - yCoord;
             switch (((orientation / 90) % 4 + 4) % 4) {
                 case 0:
                     obstacle8.setImageResource(Helper.resources.get("o8n"));
+//                    infoToSend = "ROTATE,Obstacle8,N";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle8");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 1:
                     obstacle8.setImageResource(Helper.resources.get("o8e"));
+//                    infoToSend = "ROTATE,Obstacle8,E";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle8");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 2:
                     obstacle8.setImageResource(Helper.resources.get("o8s"));
+//                    infoToSend = "ROTATE,Obstacle8,S";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle8");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
                 case 3:
                     obstacle8.setImageResource(Helper.resources.get("o8w"));
+//                    infoToSend = "ROTATE,Obstacle8,W";
+                    infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle8");
+                    bytes = infoToSend.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
                     break;
             }
         });
@@ -414,7 +625,7 @@ public class Arena extends AppCompatActivity {
                         int yCoordFinal = 20 - yCoord - 1;
                         updateXYDirText();
                         car.setRotation(orientation % 360);
-                        String infoToSend = "No info added";
+                        String infoToSend = "Error, no info added";
                         if(xCoord > 18 || yCoordFinal > 18 || yCoordFinal < 1){
                             infoToSend = "SUB,robot";
                         }
@@ -466,17 +677,19 @@ public class Arena extends AppCompatActivity {
                         obstacle1.setX(snapToX);
                         obstacle1.setY(snapToY);
                         obstacle1.setRotation(orientation % 360);
+                        String direction = getDirection(orientation);
                         int xCoord = (int) (obstacle1.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
                         int yCoord = (int) (obstacle1.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
                         // (0,0) starts from top left hence invert y
                         int yCoordFinal = 20 - yCoord;
-                        String infoToSend = "No info added";
-                        if(xCoord > 19 || yCoordFinal > 19 || yCoordFinal < 0){
-                            infoToSend = "SUB,Obstacle1";
-                        }
-                        else{
-                            infoToSend = "ADD,Obstacle1,(" + xCoord + "," + yCoordFinal + ")";
-                        }
+                        String infoToSend = "";
+                        infoToSend = getObstacleSend(xCoord, yCoordFinal, 1, direction, "Obstacle1");
+//                        if(xCoord > 19 || yCoordFinal > 19 || yCoordFinal < 0){
+//                            infoToSend = "SUB,Obstacle1";
+//                        }
+//                        else{
+//                            infoToSend = "ADD,Obstacle1,(" + xCoord + "," + yCoordFinal + ")"+ "," + direction;
+//                        }
                         byte[] bytes = infoToSend.getBytes(Charset.defaultCharset());
                         BluetoothService.write(bytes);
                         break;
@@ -522,18 +735,13 @@ public class Arena extends AppCompatActivity {
                         obstacle2.setX(snapToX);
                         obstacle2.setY(snapToY);
                         obstacle2.setRotation(orientation % 360);
-
+                        String direction = getDirection(orientation);
                         int xCoord = (int) (obstacle2.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
                         int yCoord = (int) (obstacle2.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
                         // (0,0) starts from top left hence invert y
                         int yCoordFinal = 20 - yCoord;
-                        String infoToSend = "No info added";
-                        if(xCoord > 19 || yCoordFinal > 19 || yCoordFinal < 0){
-                            infoToSend = "SUB,Obstacle2";
-                        }
-                        else{
-                            infoToSend = "ADD,Obstacle2,(" + xCoord + "," + yCoordFinal + ")";
-                        }
+                        String infoToSend = "";
+                        infoToSend = getObstacleSend(xCoord, yCoordFinal, 1, direction, "Obstacle2");
                         byte[] bytes = infoToSend.getBytes(Charset.defaultCharset());
                         BluetoothService.write(bytes);
                         break;
@@ -579,18 +787,13 @@ public class Arena extends AppCompatActivity {
                         obstacle3.setX(snapToX);
                         obstacle3.setY(snapToY);
                         obstacle3.setRotation(orientation % 360);
-
+                        String direction = getDirection(orientation);
                         int xCoord = (int) (obstacle3.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
                         int yCoord = (int) (obstacle3.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
                         // (0,0) starts from top left hence invert y
                         int yCoordFinal = 20 - yCoord;
-                        String infoToSend = "No info added";
-                        if(xCoord > 19 || yCoordFinal > 19 || yCoordFinal < 0){
-                            infoToSend = "SUB,Obstacle3";
-                        }
-                        else{
-                            infoToSend = "ADD,Obstacle3,(" + xCoord + "," + yCoordFinal + ")";
-                        }
+                        String infoToSend = "";
+                        infoToSend = getObstacleSend(xCoord, yCoordFinal, 1, direction, "Obstacle3");
                         byte[] bytes = infoToSend.getBytes(Charset.defaultCharset());
                         BluetoothService.write(bytes);
                         break;
@@ -636,18 +839,13 @@ public class Arena extends AppCompatActivity {
                         obstacle4.setX(snapToX);
                         obstacle4.setY(snapToY);
                         obstacle4.setRotation(orientation % 360);
-
+                        String direction = getDirection(orientation);
                         int xCoord = (int) (obstacle4.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
                         int yCoord = (int) (obstacle4.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
                         // (0,0) starts from top left hence invert y
                         int yCoordFinal = 20 - yCoord;
-                        String infoToSend = "No info added";
-                        if(xCoord > 19 || yCoordFinal > 19 || yCoordFinal < 0){
-                            infoToSend = "SUB,Obstacle4";
-                        }
-                        else{
-                            infoToSend = "ADD,Obstacle4,(" + xCoord + "," + yCoordFinal + ")";
-                        }
+                        String infoToSend = "";
+                        infoToSend = getObstacleSend(xCoord, yCoordFinal, 1, direction, "Obstacle4");
                         byte[] bytes = infoToSend.getBytes(Charset.defaultCharset());
                         BluetoothService.write(bytes);
                         break;
@@ -693,18 +891,13 @@ public class Arena extends AppCompatActivity {
                         obstacle5.setX(snapToX);
                         obstacle5.setY(snapToY);
                         obstacle5.setRotation(orientation % 360);
-
+                        String direction = getDirection(orientation);
                         int xCoord = (int) (obstacle5.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
                         int yCoord = (int) (obstacle5.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
                         // (0,0) starts from top left hence invert y
                         int yCoordFinal = 20 - yCoord;
-                        String infoToSend = "No info added";
-                        if(xCoord > 19 || yCoordFinal > 19 || yCoordFinal < 0){
-                            infoToSend = "SUB,Obstacle5";
-                        }
-                        else{
-                            infoToSend = "ADD,Obstacle5,(" + xCoord + "," + yCoordFinal + ")";
-                        }
+                        String infoToSend = "";
+                        infoToSend = getObstacleSend(xCoord, yCoordFinal, 1, direction, "Obstacle5");
                         byte[] bytes = infoToSend.getBytes(Charset.defaultCharset());
                         BluetoothService.write(bytes);
                         break;
@@ -750,18 +943,13 @@ public class Arena extends AppCompatActivity {
                         obstacle6.setX(snapToX);
                         obstacle6.setY(snapToY);
                         obstacle6.setRotation(orientation % 360);
-
+                        String direction = getDirection(orientation);
                         int xCoord = (int) (obstacle6.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
                         int yCoord = (int) (obstacle6.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
                         // (0,0) starts from top left hence invert y
                         int yCoordFinal = 20 - yCoord;
-                        String infoToSend = "No info added";
-                        if(xCoord > 19 || yCoordFinal > 19 || yCoordFinal < 0){
-                            infoToSend = "SUB,Obstacle6";
-                        }
-                        else{
-                            infoToSend = "ADD,Obstacle6,(" + xCoord + "," + yCoordFinal + ")";
-                        }
+                        String infoToSend = "";
+                        infoToSend = getObstacleSend(xCoord, yCoordFinal, 1, direction, "Obstacle6");
                         byte[] bytes = infoToSend.getBytes(Charset.defaultCharset());
                         BluetoothService.write(bytes);
                         break;
@@ -807,18 +995,13 @@ public class Arena extends AppCompatActivity {
                         obstacle7.setX(snapToX);
                         obstacle7.setY(snapToY);
                         obstacle7.setRotation(orientation % 360);
-
+                        String direction = getDirection(orientation);
                         int xCoord = (int) (obstacle7.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
                         int yCoord = (int) (obstacle7.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
                         // (0,0) starts from top left hence invert y
                         int yCoordFinal = 20 - yCoord;
-                        String infoToSend = "No info added";
-                        if(xCoord > 19 || yCoordFinal > 19 || yCoordFinal < 0){
-                            infoToSend = "SUB,Obstacle7";
-                        }
-                        else{
-                            infoToSend = "ADD,Obstacle7,(" + xCoord + "," + yCoordFinal + ")";
-                        }
+                        String infoToSend = "";
+                        infoToSend = getObstacleSend(xCoord, yCoordFinal, 1, direction, "Obstacle7");
                         byte[] bytes = infoToSend.getBytes(Charset.defaultCharset());
                         BluetoothService.write(bytes);
                         break;
@@ -864,18 +1047,13 @@ public class Arena extends AppCompatActivity {
                         obstacle8.setX(snapToX);
                         obstacle8.setY(snapToY);
                         obstacle8.setRotation(orientation % 360);
-
+                        String direction = getDirection(orientation);
                         int xCoord = (int) (obstacle8.getX() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL - 1;
                         int yCoord = (int) (obstacle8.getY() + SNAP_GRID_INTERVAL) / SNAP_GRID_INTERVAL;
                         // (0,0) starts from top left hence invert y
                         int yCoordFinal = 20 - yCoord;
-                        String infoToSend = "No info added";
-                        if(xCoord > 19 || yCoordFinal > 19 || yCoordFinal < 0){
-                            infoToSend = "SUB,Obstacle8";
-                        }
-                        else{
-                            infoToSend = "ADD,Obstacle8,(" + xCoord + "," + yCoordFinal + ")";
-                        }
+                        String infoToSend = "";
+                        infoToSend = getObstacleSend(xCoord, yCoordFinal, 1, direction, "Obstacle8");
                         byte[] bytes = infoToSend.getBytes(Charset.defaultCharset());
                         BluetoothService.write(bytes);
                         break;
@@ -2153,8 +2331,8 @@ public class Arena extends AppCompatActivity {
         car.setRotation(0);
         updateXYDirText();
 
-        car.setImageResource(Helper.resources.get("carn"));
-        car.setTag(Helper.resources.get("carn"));
+        car.setImageResource(Helper.resources.get("car"));
+        car.setTag(Helper.resources.get("car"));
         obstacle1.setImageResource(Helper.resources.get("o1n"));
         obstacle1.setTag(Helper.resources.get("o1n"));
         obstacle2.setImageResource(Helper.resources.get("o2n"));
@@ -2758,20 +2936,32 @@ public class Arena extends AppCompatActivity {
 
                         String prefix = moveCommand.substring(0, 2);
                         String distance = moveCommand.substring(2);
-                        int convertedDistance;
+                        int convertedDistance, rotationVal;
                         Log.d(TAG, prefix + ";" + distance);
 
                         switch (prefix) {
                             // forward
-                            case "SF":
+                            case "MF":
                                 convertedDistance = Integer.parseInt(distance) / 10;
                                 Log.d(TAG, prefix + ";" + convertedDistance);
                                 forwardButtonCommand(convertedDistance);
                                 break;
                             // reverseA
-                            case "SB":
+                            case "MB":
                                 convertedDistance = Integer.parseInt(distance) / 10;
                                 reverseButtonCommand(convertedDistance);
+                                break;
+                            // Left
+                            case "ML":
+                                rotationVal = (int) ((car.getRotation()+270)%360);
+                                Log.d(TAG, "Rotating" + rotationVal);
+                                car.setRotation(rotationVal);
+                                break;
+                            // Right
+                            case "MR":
+                                rotationVal = (int) ((car.getRotation()+90)%360);
+                                Log.d(TAG, "Rotating" + rotationVal);
+                                car.setRotation(rotationVal);
                                 break;
                             // right forward
                             case "RF":
