@@ -131,7 +131,7 @@ public class Arena extends AppCompatActivity {
     }
 
     private static final int SNAP_GRID_INTERVAL = 35;
-    private static final int ANIMATOR_DURATION = 1000;
+    private static final int ANIMATOR_DURATION = 10;
 
     /*
      * start from (1,1)
@@ -1101,7 +1101,7 @@ public class Arena extends AppCompatActivity {
             // Bluetooth message
             if (BluetoothService.BluetoothConnectionStatus) {
                 // byte[] bytes = "STM:w100n".getBytes(Charset.defaultCharset());
-                byte[] bytes = "W".getBytes(Charset.defaultCharset());
+                byte[] bytes = "SF010".getBytes(Charset.defaultCharset());
                 BluetoothService.write(bytes);
 //                byte[] bytes = "STM:n".getBytes(Charset.defaultCharset());
                 // BluetoothService.write(bytes);
@@ -1118,7 +1118,7 @@ public class Arena extends AppCompatActivity {
             // Bluetooth message
             if (BluetoothService.BluetoothConnectionStatus) {
                 // byte[] bytes = "STM:s100n".getBytes(Charset.defaultCharset());
-                byte[] bytes = "S".getBytes(Charset.defaultCharset());
+                byte[] bytes = "SB010".getBytes(Charset.defaultCharset());
                 BluetoothService.write(bytes);
 //                byte[] bytes = "STM:s".getBytes(Charset.defaultCharset());
                 // BluetoothService.write(bytes);
@@ -1134,13 +1134,13 @@ public class Arena extends AppCompatActivity {
 
             if (BluetoothService.BluetoothConnectionStatus) {
                 // byte[] bytes = "STM:ln".getBytes(Charset.defaultCharset());
-                byte[] bytes = "A".getBytes(Charset.defaultCharset());
+                byte[] bytes = "LF090".getBytes(Charset.defaultCharset());
                 BluetoothService.write(bytes);
 //                byte[] bytes = "STM:w".getBytes(Charset.defaultCharset());
                 // BluetoothService.write(bytes);
             }
-
-            leftCommand();
+            leftMidButtonCommand();
+//            leftCommand();
         });
 
         ImageButton rightButton = (ImageButton) findViewById(R.id.rightButton);
@@ -1149,13 +1149,13 @@ public class Arena extends AppCompatActivity {
 
             if (BluetoothService.BluetoothConnectionStatus) {
                 // byte[] bytes = "STM:rn".getBytes(Charset.defaultCharset());
-                byte[] bytes = "D".getBytes(Charset.defaultCharset());
+                byte[] bytes = "RF090".getBytes(Charset.defaultCharset());
                 BluetoothService.write(bytes);
 //                byte[] bytes = "STM:e".getBytes(Charset.defaultCharset());
                 // BluetoothService.write(bytes);
             }
-
-            rightCommand();
+            rightMidButtonCommand();
+//            rightCommand();
         });
     }
 
@@ -1565,8 +1565,8 @@ public class Arena extends AppCompatActivity {
 
         switch (((orientation / 90) % 4 + 4) % 4) {
             case 0:
-                new_y = (int) car.getY() - 2 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - 3 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() - 1 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() - 5 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -1591,8 +1591,8 @@ public class Arena extends AppCompatActivity {
                 animatorSet.start();
                 break;
             case 1:
-                new_y = (int) car.getY() - 3 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + 2 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() - 5 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() + 1 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -1617,8 +1617,8 @@ public class Arena extends AppCompatActivity {
                 animatorSet.start();
                 break;
             case 2:
-                new_y = (int) car.getY() + 2 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + 3 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() + 1 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() + 5 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -1643,8 +1643,8 @@ public class Arena extends AppCompatActivity {
                 animatorSet.start();
                 break;
             case 3:
-                new_y = (int) car.getY() + 3 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - 2 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() + 5 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() - 1 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -1685,8 +1685,8 @@ public class Arena extends AppCompatActivity {
 
         switch (((orientation / 90) % 4 + 4) % 4) {
             case 0:
-                new_y = (int) car.getY() - 2 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + 3 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() - 1 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() + 5 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -1711,8 +1711,8 @@ public class Arena extends AppCompatActivity {
                 animatorSet.start();
                 break;
             case 1:
-                new_y = (int) car.getY() + 3 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + 2 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() + 5 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() + 1 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -1737,8 +1737,8 @@ public class Arena extends AppCompatActivity {
                 animatorSet.start();
                 break;
             case 2:
-                new_y = (int) car.getY() + 2 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - 3 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() + 1 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() - 5 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -1763,8 +1763,8 @@ public class Arena extends AppCompatActivity {
                 animatorSet.start();
                 break;
             case 3:
-                new_y = (int) car.getY() - 3 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - 2 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() - 5 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() - 1 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -2014,8 +2014,8 @@ public class Arena extends AppCompatActivity {
 
         switch (((orientation / 90) % 4 + 4) % 4) {
             case 0:
-                new_y = (int) car.getY() + 3 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - 2 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() + 5 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() - 1 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -2040,8 +2040,8 @@ public class Arena extends AppCompatActivity {
                 animatorSet.start();
                 break;
             case 1:
-                new_y = (int) car.getY() - 2 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - 3 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() - 1 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() - 5 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -2066,8 +2066,8 @@ public class Arena extends AppCompatActivity {
                 animatorSet.start();
                 break;
             case 2:
-                new_y = (int) car.getY() - 3 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + 2 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() - 5 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() + 1 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -2092,8 +2092,8 @@ public class Arena extends AppCompatActivity {
                 animatorSet.start();
                 break;
             case 3:
-                new_y = (int) car.getY() + 2 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + 3 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() + 1 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() + 5 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -2134,8 +2134,8 @@ public class Arena extends AppCompatActivity {
 
         switch (((orientation / 90) % 4 + 4) % 4) {
             case 0:
-                new_y = (int) car.getY() + 3 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + 2 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() + 5 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() + 1 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -2160,8 +2160,8 @@ public class Arena extends AppCompatActivity {
                 animatorSet.start();
                 break;
             case 1:
-                new_y = (int) car.getY() + 2 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - 3 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() + 1 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() - 5 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -2186,8 +2186,8 @@ public class Arena extends AppCompatActivity {
                 animatorSet.start();
                 break;
             case 2:
-                new_y = (int) car.getY() - 3 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - 2 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() - 5 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() - 1 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -2212,8 +2212,8 @@ public class Arena extends AppCompatActivity {
                 animatorSet.start();
                 break;
             case 3:
-                new_y = (int) car.getY() - 2 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + 3 * SNAP_GRID_INTERVAL;
+                new_y = (int) car.getY() - 1 * SNAP_GRID_INTERVAL;
+                new_x = (int) car.getX() + 5 * SNAP_GRID_INTERVAL;
 
                 moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
                 moveStraightAnimator.setDuration(ANIMATOR_DURATION);
@@ -2941,13 +2941,13 @@ public class Arena extends AppCompatActivity {
 
                         switch (prefix) {
                             // forward
-                            case "MF":
+                            case "SF":
                                 convertedDistance = Integer.parseInt(distance) / 10;
                                 Log.d(TAG, prefix + ";" + convertedDistance);
                                 forwardButtonCommand(convertedDistance);
                                 break;
-                            // reverseA
-                            case "MB":
+                            // reverse
+                            case "SB":
                                 convertedDistance = Integer.parseInt(distance) / 10;
                                 reverseButtonCommand(convertedDistance);
                                 break;
