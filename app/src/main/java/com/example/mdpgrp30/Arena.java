@@ -625,12 +625,13 @@ public class Arena extends AppCompatActivity {
                         int yCoordFinal = 20 - yCoord - 1;
                         updateXYDirText();
                         car.setRotation(orientation % 360);
+                        String direction = getDirection(orientation);
                         String infoToSend = "Error, no info added";
                         if(xCoord > 18 || yCoordFinal > 18 || yCoordFinal < 1){
                             infoToSend = "SUB,robot";
                         }
                         else{
-                            infoToSend = "ADD,robot,(" + xCoord + "," + yCoordFinal + ")";
+                            infoToSend = "ADD,robot,(" + xCoord + "," + yCoordFinal + ")," + direction;
                         }
                         byte[] bytes = infoToSend.getBytes(Charset.defaultCharset());
                         BluetoothService.write(bytes);
