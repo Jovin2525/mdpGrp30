@@ -204,7 +204,7 @@ public class Arena extends AppCompatActivity {
                     infoToSend = "ROTATE," + obstacleNo + ",Out Of Grid," + direction;
                 }
                 else{
-                    infoToSend = "ROTATE," + obstacleNo + "(" + xCoord + "," + yCoordFinal + ")," + direction;
+                    infoToSend = "ROTATE," + obstacleNo + ",(" + xCoord + "," + yCoordFinal + ")," + direction;
                 }
                 break;
             case 1: //add or sub
