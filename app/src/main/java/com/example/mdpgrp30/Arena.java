@@ -2360,6 +2360,11 @@ public class Arena extends AppCompatActivity {
         obstacle7.setRotation(0);
         obstacle8.setRotation(0);
 
+        String infoToSend = "";
+        byte[] bytes = null;
+        infoToSend = "RESET";
+        bytes = infoToSend.getBytes(Charset.defaultCharset());
+        BluetoothService.write(bytes);
         // Toast.makeText(this, "Map Reset", Toast.LENGTH_SHORT).show();
     }
 
