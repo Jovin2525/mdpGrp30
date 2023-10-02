@@ -51,8 +51,8 @@ public class Bluetooth extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
     BluetoothService mBluetoothConnection;
-//    private static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    public static final UUID myUUID = UUID.fromString("443559ba-b80f-4fb6-99d9-ddbcd6138fbd");
+    private static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+//    public static final UUID myUUID = UUID.fromString("443559ba-b80f-4fb6-99d9-ddbcd6138fbd");
     public static BluetoothDevice mBTDevice;
 
     boolean retryConnection = false;
