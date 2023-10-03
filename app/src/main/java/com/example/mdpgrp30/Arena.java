@@ -2384,42 +2384,26 @@ public class Arena extends AppCompatActivity {
         obstacle1.setRotation(90);
         obstacle1.setImageResource(Helper.resources.get("o1e"));
 
-
-//        obstacle2.setX(595);
-//        obstacle2.setY(70);
-//        obstacle2.setRotation(270);
-//        obstacle2.setImageResource(Helper.resources.get("o2w"));
-//
-//        obstacle3.setX(70);
-//        obstacle3.setY(105);
-//        obstacle3.setRotation(180);
-//        obstacle3.setImageResource(Helper.resources.get("o3s"));
-
         obstacle4.setX(560);
         obstacle4.setY(35);
         obstacle4.setRotation(180);
         obstacle4.setImageResource(Helper.resources.get("o4s"));
 
-//
-//        obstacle5.setX(455);
-//        obstacle5.setY(630);
-//        obstacle5.setRotation(270);
-//        obstacle5.setImageResource(Helper.resources.get("o5w"));
-//
-//        obstacle6.setX(210);
-//        obstacle6.setY(455);
-//        obstacle6.setRotation(0);
-//        obstacle6.setImageResource(Helper.resources.get("o6n"));
-//
-//        obstacle7.setX(315);
-//        obstacle7.setY(280);
-//        obstacle7.setRotation(270);
-//        obstacle7.setImageResource(Helper.resources.get("o7w"));
-
         obstacle8.setX(210);
         obstacle8.setY(490);
         obstacle8.setRotation(90);
         obstacle8.setImageResource(Helper.resources.get("o8e"));
+
+
+        obstacle2.setX(350);
+        obstacle2.setY(595);
+        obstacle2.setRotation(270);
+        obstacle2.setImageResource(Helper.resources.get("o2s"));
+
+        obstacle3.setX(350);
+        obstacle3.setY(420);
+        obstacle3.setRotation(0);
+        obstacle3.setImageResource(Helper.resources.get("o3e"));
 
         try {
             Thread.sleep(100);
@@ -2433,6 +2417,26 @@ public class Arena extends AppCompatActivity {
             throw new RuntimeException(e);
         }
         toSend = getObstacleSend(1,16,1,"E","1");
+        toSendFinal = toSend + "\n";
+        bytes = toSendFinal.getBytes(Charset.defaultCharset());
+        BluetoothService.write(bytes);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        toSend = getObstacleSend(10,2,1,"W","2");
+        toSendFinal = toSend + "\n";
+        bytes = toSendFinal.getBytes(Charset.defaultCharset());
+        BluetoothService.write(bytes);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        toSend = getObstacleSend(10,7,1,"E","3");
         toSendFinal = toSend + "\n";
         bytes = toSendFinal.getBytes(Charset.defaultCharset());
         BluetoothService.write(bytes);
@@ -2461,6 +2465,7 @@ public class Arena extends AppCompatActivity {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
 
         // Toast.makeText(Arena.this, "Preset 1 Applied", Toast.LENGTH_SHORT).show();
     }
