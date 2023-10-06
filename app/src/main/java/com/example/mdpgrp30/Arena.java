@@ -143,7 +143,7 @@ public class Arena extends AppCompatActivity {
     private boolean canSetObstacles = false;
     private String curMode = "IDLE";
 
-    Button IRButton, SPButton, resetButton, preset1Button, setButton, timerButton, saveButton;
+    Button IRButton, SPButton, resetButton, preset1Button, setButton, timerButton; //saveButton;
     ImageView obstacle1, obstacle2, obstacle3, obstacle4, obstacle5, obstacle6, obstacle7, obstacle8, car;
     TextView statusWindow, car_x, car_y, car_dir;
 
@@ -1180,7 +1180,7 @@ public class Arena extends AppCompatActivity {
         resetButton = findViewById(R.id.resetButton);
         preset1Button = findViewById(R.id.preset1Button);
         setButton = findViewById(R.id.setButton);
-        saveButton = findViewById(R.id.saveButton);
+//        saveButton = findViewById(R.id.saveButton);
         timerButton = findViewById(R.id.timerButton);
         statusWindow = findViewById(R.id.statusWindowText);
 
@@ -1190,7 +1190,7 @@ public class Arena extends AppCompatActivity {
         resetButton.setOnClickListener(view -> setResetButton());
         preset1Button.setOnClickListener(view -> setPreset1Button());
         setButton.setOnClickListener(view -> toggleSetMode());
-        saveButton.setOnClickListener(view -> sendObstacles());
+//        saveButton.setOnClickListener(view -> sendObstacles());
         timerButton.setOnClickListener(view -> stopTimerButton());
 
 //        // Initialize car to bottom left
@@ -2262,7 +2262,7 @@ public class Arena extends AppCompatActivity {
             // Toast.makeText(this, stringBuilder.toString(), Toast.LENGTH_SHORT).show();
             byte[] bytes = IRstart.getBytes(Charset.defaultCharset());
             BluetoothService.write(bytes);
-            Toast.makeText(Arena.this, "Obstacles sent", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Arena.this, "Starting Task 1", Toast.LENGTH_SHORT).show();
             updateStatusWindow("IR Started");
         } else {
             updateStatusWindow("IR Not Started");
@@ -2282,7 +2282,7 @@ public class Arena extends AppCompatActivity {
         if (BluetoothService.BluetoothConnectionStatus) {
             byte[] bytes = "STM:sp".getBytes(Charset.defaultCharset());
             BluetoothService.write(bytes);
-            Toast.makeText(Arena.this, "Shortest Path Started.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Arena.this, "Task 2 Started.", Toast.LENGTH_SHORT).show();
             updateStatusWindow("SP Started");
         } else {
             updateStatusWindow("SP Not Started");
@@ -2723,26 +2723,26 @@ public class Arena extends AppCompatActivity {
         }
     }
 
-    private void sendObstacles() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder
-                .append("ALG:")
-                .append(getObstacleString(obstacle1) + "0;")
-                .append(getObstacleString(obstacle2) + "1;")
-                .append(getObstacleString(obstacle3) + "2;")
-                .append(getObstacleString(obstacle4) + "3;")
-                .append(getObstacleString(obstacle5) + "4;")
-                .append(getObstacleString(obstacle6) + "5;")
-                .append(getObstacleString(obstacle7) + "6;")
-                .append(getObstacleString(obstacle8) + "7;");
-        Log.d(TAG, stringBuilder.toString());
-
-        if (BluetoothService.BluetoothConnectionStatus) {
-            byte[] bytes = stringBuilder.toString().getBytes(Charset.defaultCharset());
-            BluetoothService.write(bytes);
-            Toast.makeText(Arena.this, "Obstacles sent", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void sendObstacles() {
+//        StringBuilder stringBuilder = new StringBuilder();
+//        stringBuilder
+//                .append("ALG:")
+//                .append(getObstacleString(obstacle1) + "0;")
+//                .append(getObstacleString(obstacle2) + "1;")
+//                .append(getObstacleString(obstacle3) + "2;")
+//                .append(getObstacleString(obstacle4) + "3;")
+//                .append(getObstacleString(obstacle5) + "4;")
+//                .append(getObstacleString(obstacle6) + "5;")
+//                .append(getObstacleString(obstacle7) + "6;")
+//                .append(getObstacleString(obstacle8) + "7;");
+//        Log.d(TAG, stringBuilder.toString());
+//
+//        if (BluetoothService.BluetoothConnectionStatus) {
+//            byte[] bytes = stringBuilder.toString().getBytes(Charset.defaultCharset());
+//            BluetoothService.write(bytes);
+//            Toast.makeText(Arena.this, "Obstacles sent", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     /*
      * Returns 2-D array of obstacles in [x, y, direction] format
