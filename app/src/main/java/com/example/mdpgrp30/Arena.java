@@ -131,7 +131,7 @@ public class Arena extends AppCompatActivity {
     }
 
     private static final int SNAP_GRID_INTERVAL = 35;
-    private static final int ANIMATOR_DURATION = 10;
+    private static final int ANIMATOR_DURATION = 1000;
 
     /*
      * start from (1,1)
