@@ -2379,38 +2379,44 @@ public class Arena extends AppCompatActivity {
         byte[] bytes = null;
         String toSendFinal = "";
 
-        obstacle1.setX(35); // 1
-        obstacle1.setY(105); //16 (3x35)
+        obstacle1.setX(35);
+        obstacle1.setY(105);
         obstacle1.setRotation(90);
         obstacle1.setImageResource(Helper.resources.get("o1e"));
 
-        obstacle2.setX(350); //10
-        obstacle2.setY(595); //2 (17x35)
+        obstacle2.setX(350);
+        obstacle2.setY(595);
         obstacle2.setRotation(270);
         obstacle2.setImageResource(Helper.resources.get("o2w"));
 
-        obstacle3.setX(210); //6
-        obstacle3.setY(490); //5 (14x35)
+        obstacle3.setX(210);
+        obstacle3.setY(490);
         obstacle3.setRotation(90);
         obstacle3.setImageResource(Helper.resources.get("o3e"));
 
-        obstacle4.setX(280); //8
-        obstacle4.setY(245); //12 (7x35)
-        obstacle4.setRotation(270);
-        obstacle4.setImageResource(Helper.resources.get("o4w"));
 
-        obstacle5.setX(560); //16
-        obstacle5.setY(525); //4 (15x35)
+        obstacle4.setX(280);
+        obstacle4.setY(245);
+        obstacle4.setRotation(0);
+        obstacle4.setImageResource(Helper.resources.get("o4n"));
+
+        obstacle5.setX(560);
+        obstacle5.setY(525);
         obstacle5.setRotation(270);
         obstacle5.setImageResource(Helper.resources.get("o5w"));
 
-        obstacle6.setX(490); //14
-        obstacle6.setY(315); //10 (9x35)
+        obstacle6.setX(490);
+        obstacle6.setY(315);
         obstacle6.setRotation(180);
         obstacle6.setImageResource(Helper.resources.get("o6s"));
 
-        obstacle8.setX(560); //16
-        obstacle8.setY(35); //18 (1x35)
+        obstacle7.setX(280);
+        obstacle7.setY(35);
+        obstacle7.setRotation(180);
+        obstacle7.setImageResource(Helper.resources.get("o7s"));
+
+        obstacle8.setX(560);
+        obstacle8.setY(35);
         obstacle8.setRotation(180);
         obstacle8.setImageResource(Helper.resources.get("o8s"));
 
@@ -2455,7 +2461,7 @@ public class Arena extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        toSend = getObstacleSend(8,12,1,"W","4");
+        toSend = getObstacleSend(8,12,1,"N","4");
         toSendFinal = toSend + "\n";
         bytes = toSendFinal.getBytes(Charset.defaultCharset());
         BluetoothService.write(bytes);
@@ -2485,6 +2491,16 @@ public class Arena extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
+        toSend = getObstacleSend(8,18,1,"S","7");
+        toSendFinal = toSend + "\n";
+        bytes = toSendFinal.getBytes(Charset.defaultCharset());
+        BluetoothService.write(bytes);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         toSend = getObstacleSend(16,18,1,"S","8");
         toSendFinal = toSend + "\n";
         bytes = toSendFinal.getBytes(Charset.defaultCharset());
@@ -2498,7 +2514,6 @@ public class Arena extends AppCompatActivity {
 
         // Toast.makeText(Arena.this, "Preset 1 Applied", Toast.LENGTH_SHORT).show();
     }
-
 
     public String[][] savedPreset = {};
 
