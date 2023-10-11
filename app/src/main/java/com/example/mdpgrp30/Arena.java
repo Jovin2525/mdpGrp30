@@ -277,11 +277,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle1");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 1:
                     obstacle1.setImageResource(Helper.resources.get("o1e"));
@@ -289,11 +284,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle1");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 2:
                     obstacle1.setImageResource(Helper.resources.get("o1s"));
@@ -301,11 +291,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle1");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 3:
                     obstacle1.setImageResource(Helper.resources.get("o1w"));
@@ -313,11 +298,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle1");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
             }
         });
@@ -338,11 +318,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle2");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 1:
                     obstacle2.setImageResource(Helper.resources.get("o2e"));
@@ -350,11 +325,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle2");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 2:
                     obstacle2.setImageResource(Helper.resources.get("o2s"));
@@ -362,11 +332,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle2");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 3:
                     obstacle2.setImageResource(Helper.resources.get("o2w"));
@@ -374,11 +339,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle2");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
             }
         });
@@ -398,11 +358,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle3");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 1:
                     obstacle3.setImageResource(Helper.resources.get("o3e"));
@@ -410,11 +365,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle3");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 2:
                     obstacle3.setImageResource(Helper.resources.get("o3s"));
@@ -422,11 +372,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle3");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 3:
                     obstacle3.setImageResource(Helper.resources.get("o3w"));
@@ -434,11 +379,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle3");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
             }
         });
@@ -458,11 +398,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle4");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 1:
                     obstacle4.setImageResource(Helper.resources.get("o4e"));
@@ -470,11 +405,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle4");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 2:
                     obstacle4.setImageResource(Helper.resources.get("o4s"));
@@ -482,11 +412,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle4");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 3:
                     obstacle4.setImageResource(Helper.resources.get("o4w"));
@@ -494,11 +419,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle4");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
             }
         });
@@ -518,11 +438,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle5");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 1:
                     obstacle5.setImageResource(Helper.resources.get("o5e"));
@@ -530,11 +445,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle5");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 2:
                     obstacle5.setImageResource(Helper.resources.get("o5s"));
@@ -542,11 +452,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle5");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 3:
                     obstacle5.setImageResource(Helper.resources.get("o5w"));
@@ -554,11 +459,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle5");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
             }
         });
@@ -578,11 +478,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle6");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 1:
                     obstacle6.setImageResource(Helper.resources.get("o6e"));
@@ -590,11 +485,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle6");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 2:
                     obstacle6.setImageResource(Helper.resources.get("o6s"));
@@ -602,11 +492,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle6");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 3:
                     obstacle6.setImageResource(Helper.resources.get("o6w"));
@@ -614,11 +499,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle6");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
             }
         });
@@ -638,11 +518,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle7");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 1:
                     obstacle7.setImageResource(Helper.resources.get("o7e"));
@@ -650,11 +525,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle7");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 2:
                     obstacle7.setImageResource(Helper.resources.get("o7s"));
@@ -662,11 +532,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle7");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 3:
                     obstacle7.setImageResource(Helper.resources.get("o7w"));
@@ -674,11 +539,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle7");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
             }
         });
@@ -698,11 +558,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "N", "Obstacle8");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 1:
                     obstacle8.setImageResource(Helper.resources.get("o8e"));
@@ -710,11 +565,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "E", "Obstacle8");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 2:
                     obstacle8.setImageResource(Helper.resources.get("o8s"));
@@ -722,11 +572,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "S", "Obstacle8");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
                 case 3:
                     obstacle8.setImageResource(Helper.resources.get("o8w"));
@@ -734,11 +579,6 @@ public class Arena extends AppCompatActivity {
                     infoToSend = getObstacleSend(xCoord, yCoordFinal, 0, "W", "Obstacle8");
                     bytes = infoToSend.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
                     break;
             }
         });
@@ -2531,11 +2371,6 @@ public class Arena extends AppCompatActivity {
         bytes = infoToSend.getBytes(Charset.defaultCharset());
         BluetoothService.write(bytes);
         // Toast.makeText(this, "Map Reset", Toast.LENGTH_SHORT).show();
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void setPreset1Button() {
