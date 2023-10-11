@@ -3079,6 +3079,7 @@ public class Arena extends AppCompatActivity {
                                         rotationVal = (int) ((car.getRotation() + 90) % 360);
                                         Log.d(TAG, "Rotating" + rotationVal);
                                         car.setRotation(rotationVal);
+                                        updateXYDirText();
                                         break;
 //                                    case 9:
 //                                        rightMidButtonCommand();
@@ -3112,6 +3113,7 @@ public class Arena extends AppCompatActivity {
                                         rotationVal = (int) ((car.getRotation() + 270) % 360);
                                         Log.d(TAG, "Rotating" + rotationVal);
                                         car.setRotation(rotationVal);
+                                        updateXYDirText();
                                         break;
 //                                    case 9:
 //                                        rightMidButtonCommand();
