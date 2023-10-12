@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -143,7 +144,7 @@ public class Arena extends AppCompatActivity {
     private boolean canSetObstacles = false;
     private String curMode = "IDLE";
 
-    Button IRButton, SPButton, resetButton, preset1Button, setButton, timerButton; //saveButton;
+    Button IRButton, SPButton, resetButton, setButton, timerButton; //saveButton,preset1Button;
     ImageView obstacle1, obstacle2, obstacle3, obstacle4, obstacle5, obstacle6, obstacle7, obstacle8, car;
     TextView statusWindow, car_x, car_y, car_dir;
 
@@ -181,6 +182,8 @@ public class Arena extends AppCompatActivity {
             firstStart = false;
             saveData();
         }
+        showReceived = findViewById(R.id.chatlog_tv);;
+        showReceived.setMovementMethod(new ScrollingMovementMethod());
     }
     private String getDirection(int orientation){
         if (orientation == 0) {
@@ -1178,7 +1181,7 @@ public class Arena extends AppCompatActivity {
         IRButton = findViewById(R.id.IRButton);
         SPButton = findViewById(R.id.SPBtn);
         resetButton = findViewById(R.id.resetButton);
-        preset1Button = findViewById(R.id.preset1Button);
+//        preset1Button = findViewById(R.id.preset1Button);
         setButton = findViewById(R.id.setButton);
 //        saveButton = findViewById(R.id.saveButton);
         timerButton = findViewById(R.id.timerButton);
@@ -1188,7 +1191,7 @@ public class Arena extends AppCompatActivity {
         IRButton.setOnClickListener(view -> beginIRTask());
         SPButton.setOnClickListener(view -> beginSPTask());
         resetButton.setOnClickListener(view -> setResetButton());
-        preset1Button.setOnClickListener(view -> setPreset1Button());
+//        preset1Button.setOnClickListener(view -> setPreset1Button());
         setButton.setOnClickListener(view -> toggleSetMode());
 //        saveButton.setOnClickListener(view -> sendObstacles());
         timerButton.setOnClickListener(view -> stopTimerButton());
@@ -2373,147 +2376,147 @@ public class Arena extends AppCompatActivity {
         // Toast.makeText(this, "Map Reset", Toast.LENGTH_SHORT).show();
     }
 
-    private void setPreset1Button() {
-        updateStatusWindow("Ready");
-        String toSend = "";
-        byte[] bytes = null;
-        String toSendFinal = "";
-
-        obstacle1.setX(35);
-        obstacle1.setY(105);
-        obstacle1.setRotation(90);
-        obstacle1.setImageResource(Helper.resources.get("o1e"));
-
-        obstacle2.setX(350);
-        obstacle2.setY(595);
-        obstacle2.setRotation(270);
-        obstacle2.setImageResource(Helper.resources.get("o2w"));
-
-        obstacle3.setX(210);
-        obstacle3.setY(490);
-        obstacle3.setRotation(90);
-        obstacle3.setImageResource(Helper.resources.get("o3e"));
-
-
-        obstacle4.setX(280);
-        obstacle4.setY(245);
-        obstacle4.setRotation(0);
-        obstacle4.setImageResource(Helper.resources.get("o4n"));
-
-        obstacle5.setX(560);
-        obstacle5.setY(525);
-        obstacle5.setRotation(270);
-        obstacle5.setImageResource(Helper.resources.get("o5w"));
-
-        obstacle6.setX(490);
-        obstacle6.setY(315);
-        obstacle6.setRotation(180);
-        obstacle6.setImageResource(Helper.resources.get("o6s"));
-
-        obstacle7.setX(280);
-        obstacle7.setY(35);
-        obstacle7.setRotation(180);
-        obstacle7.setImageResource(Helper.resources.get("o7s"));
-
-        obstacle8.setX(560);
-        obstacle8.setY(35);
-        obstacle8.setRotation(180);
-        obstacle8.setImageResource(Helper.resources.get("o8s"));
-
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        updateRobotPosition(1,18,0);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        toSend = getObstacleSend(1,16,1,"E","1");
-        toSendFinal = toSend + "\n";
-        bytes = toSendFinal.getBytes(Charset.defaultCharset());
-        BluetoothService.write(bytes);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        toSend = getObstacleSend(10,2,1,"W","2");
-        toSendFinal = toSend + "\n";
-        bytes = toSendFinal.getBytes(Charset.defaultCharset());
-        BluetoothService.write(bytes);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        toSend = getObstacleSend(6,5,1,"E","3");
-        toSendFinal = toSend + "\n";
-        bytes = toSendFinal.getBytes(Charset.defaultCharset());
-        BluetoothService.write(bytes);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        toSend = getObstacleSend(8,12,1,"N","4");
-        toSendFinal = toSend + "\n";
-        bytes = toSendFinal.getBytes(Charset.defaultCharset());
-        BluetoothService.write(bytes);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        toSend = getObstacleSend(16,4,1,"W","5");
-        toSendFinal = toSend + "\n";
-        bytes = toSendFinal.getBytes(Charset.defaultCharset());
-        BluetoothService.write(bytes);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        toSend = getObstacleSend(14,10,1,"S","6");
-        toSendFinal = toSend + "\n";
-        bytes = toSendFinal.getBytes(Charset.defaultCharset());
-        BluetoothService.write(bytes);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        toSend = getObstacleSend(8,18,1,"S","7");
-        toSendFinal = toSend + "\n";
-        bytes = toSendFinal.getBytes(Charset.defaultCharset());
-        BluetoothService.write(bytes);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        toSend = getObstacleSend(16,18,1,"S","8");
-        toSendFinal = toSend + "\n";
-        bytes = toSendFinal.getBytes(Charset.defaultCharset());
-        BluetoothService.write(bytes);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//    private void setPreset1Button() {
+//        updateStatusWindow("Ready");
+//        String toSend = "";
+//        byte[] bytes = null;
+//        String toSendFinal = "";
+//
+//        obstacle1.setX(35);
+//        obstacle1.setY(105);
+//        obstacle1.setRotation(90);
+//        obstacle1.setImageResource(Helper.resources.get("o1e"));
+//
+//        obstacle2.setX(350);
+//        obstacle2.setY(595);
+//        obstacle2.setRotation(270);
+//        obstacle2.setImageResource(Helper.resources.get("o2w"));
+//
+//        obstacle3.setX(210);
+//        obstacle3.setY(490);
+//        obstacle3.setRotation(90);
+//        obstacle3.setImageResource(Helper.resources.get("o3e"));
+//
+//
+//        obstacle4.setX(280);
+//        obstacle4.setY(245);
+//        obstacle4.setRotation(0);
+//        obstacle4.setImageResource(Helper.resources.get("o4n"));
+//
+//        obstacle5.setX(560);
+//        obstacle5.setY(525);
+//        obstacle5.setRotation(270);
+//        obstacle5.setImageResource(Helper.resources.get("o5w"));
+//
+//        obstacle6.setX(490);
+//        obstacle6.setY(315);
+//        obstacle6.setRotation(180);
+//        obstacle6.setImageResource(Helper.resources.get("o6s"));
+//
+//        obstacle7.setX(280);
+//        obstacle7.setY(35);
+//        obstacle7.setRotation(180);
+//        obstacle7.setImageResource(Helper.resources.get("o7s"));
+//
+//        obstacle8.setX(560);
+//        obstacle8.setY(35);
+//        obstacle8.setRotation(180);
+//        obstacle8.setImageResource(Helper.resources.get("o8s"));
+//
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        updateRobotPosition(1,18,0);
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        toSend = getObstacleSend(1,16,1,"E","1");
+//        toSendFinal = toSend + "\n";
+//        bytes = toSendFinal.getBytes(Charset.defaultCharset());
+//        BluetoothService.write(bytes);
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        toSend = getObstacleSend(10,2,1,"W","2");
+//        toSendFinal = toSend + "\n";
+//        bytes = toSendFinal.getBytes(Charset.defaultCharset());
+//        BluetoothService.write(bytes);
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        toSend = getObstacleSend(6,5,1,"E","3");
+//        toSendFinal = toSend + "\n";
+//        bytes = toSendFinal.getBytes(Charset.defaultCharset());
+//        BluetoothService.write(bytes);
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        toSend = getObstacleSend(8,12,1,"N","4");
+//        toSendFinal = toSend + "\n";
+//        bytes = toSendFinal.getBytes(Charset.defaultCharset());
+//        BluetoothService.write(bytes);
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        toSend = getObstacleSend(16,4,1,"W","5");
+//        toSendFinal = toSend + "\n";
+//        bytes = toSendFinal.getBytes(Charset.defaultCharset());
+//        BluetoothService.write(bytes);
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        toSend = getObstacleSend(14,10,1,"S","6");
+//        toSendFinal = toSend + "\n";
+//        bytes = toSendFinal.getBytes(Charset.defaultCharset());
+//        BluetoothService.write(bytes);
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        toSend = getObstacleSend(8,18,1,"S","7");
+//        toSendFinal = toSend + "\n";
+//        bytes = toSendFinal.getBytes(Charset.defaultCharset());
+//        BluetoothService.write(bytes);
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        toSend = getObstacleSend(16,18,1,"S","8");
+//        toSendFinal = toSend + "\n";
+//        bytes = toSendFinal.getBytes(Charset.defaultCharset());
+//        BluetoothService.write(bytes);
+//        try {
+//            Thread.sleep(100);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
 
 
         // Toast.makeText(Arena.this, "Preset 1 Applied", Toast.LENGTH_SHORT).show();
-    }
+//    }
 
     public String[][] savedPreset = {};
 
@@ -2916,11 +2919,15 @@ public class Arena extends AppCompatActivity {
     }
 
     // Broadcast Receiver for incoming messages
+    TextView showReceived;
+
     BroadcastReceiver myReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String message = intent.getStringExtra("receivedMessage");
             String command;
+            String old = showReceived.getText().toString();
+            showReceived.setText(old + "\n[ROBOT]:  " + message);
             Log.d(TAG, "Received message: " + message);
 
             try {

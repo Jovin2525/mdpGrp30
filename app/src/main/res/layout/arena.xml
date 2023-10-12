@@ -220,19 +220,35 @@
             app:layout_constraintBottom_toBottomOf="@+id/IRButton"
             app:layout_constraintStart_toEndOf="@+id/IRButton" />
 
-        <Button
-            android:id="@+id/preset1Button"
-            android:layout_width="95dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+<!--        <Button-->
+<!--            android:id="@+id/preset1Button"-->
+<!--            android:layout_width="95dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_marginTop="228dp"-->
+<!--            android:backgroundTint="#000000"-->
+<!--            android:fontFamily="@font/jockey_one_regular"-->
+<!--            android:paddingHorizontal="15dp"-->
+<!--            android:paddingVertical="12dp"-->
+<!--            android:text="Load Preset"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="19sp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/guideline3" />-->
+
+        <TextView
+            android:id="@+id/chatlog_tv"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="228dp"
-            android:backgroundTint="#000000"
-            android:fontFamily="@font/jockey_one_regular"
+            android:background="@color/boxColor"
+            android:gravity="bottom"
             android:paddingHorizontal="15dp"
             android:paddingVertical="12dp"
-            android:text="Load Preset"
-            android:textColor="#FFFFFF"
-            android:textSize="19sp"
+            android:scrollbars="vertical"
+            android:text=""
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
