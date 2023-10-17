@@ -186,8 +186,8 @@
             android:text="IR"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@id/preset1Button"
-            app:layout_constraintStart_toStartOf="@+id/preset1Button" />
+            app:layout_constraintBottom_toTopOf="@id/chatlog_tv"
+            app:layout_constraintStart_toStartOf="@+id/chatlog_tv" />
 
         <Button
             android:id="@+id/setButton"
@@ -239,9 +239,9 @@
         <TextView
             android:id="@+id/chatlog_tv"
             android:layout_width="200dp"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="228dp"
+            android:layout_marginTop="170dp"
             android:background="@color/boxColor"
             android:gravity="bottom"
             android:paddingHorizontal="15dp"
