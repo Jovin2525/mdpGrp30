@@ -131,7 +131,7 @@
             android:backgroundTint="@color/backgroundColor"
             android:paddingHorizontal="34dp"
             android:paddingVertical="14dp"
-            android:src="@drawable/orange_arrow_right"
+            android:src="@drawable/control_arrow_right"
             app:layout_constraintStart_toEndOf="@id/leftButton"
             app:layout_constraintTop_toTopOf="@+id/forwardButton" />
 
@@ -144,7 +144,7 @@
             android:backgroundTint="@color/backgroundColor"
             android:paddingHorizontal="34dp"
             android:paddingVertical="14dp"
-            android:src="@drawable/orange_arrow_left"
+            android:src="@drawable/control_arrow_left"
             app:layout_constraintStart_toEndOf="@+id/SPBtn"
             app:layout_constraintTop_toTopOf="@id/rightButton" />
 
@@ -158,7 +158,7 @@
             android:backgroundTint="@color/backgroundColor"
             android:paddingHorizontal="34dp"
             android:paddingVertical="14dp"
-            android:src="@drawable/orange_arrow_down"
+            android:src="@drawable/control_arrow_down"
             app:layout_constraintStart_toEndOf="@+id/leftButton"
             app:layout_constraintTop_toBottomOf="@+id/forwardButton" />
 
@@ -171,7 +171,7 @@
             android:backgroundTint="@color/backgroundColor"
             android:paddingHorizontal="34dp"
             android:paddingVertical="14dp"
-            android:src="@drawable/orange_arrow_up"
+            android:src="@drawable/control_arrow_up"
             app:layout_constraintStart_toEndOf="@+id/leftButton"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
