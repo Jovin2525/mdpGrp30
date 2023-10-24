@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Arena extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
-    private static final String TAG = "Arena->DEBUG";
+    private static final String TAG = "Arena:DEBUG";
     public static boolean firstStart = true;
 
     public void saveData() {
@@ -1104,11 +1104,8 @@ public class Arena extends AppCompatActivity {
 
             // Bluetooth message
             if (BluetoothService.BluetoothConnectionStatus) {
-                // byte[] bytes = "STM:w100n".getBytes(Charset.defaultCharset());
                 byte[] bytes = "SF010".getBytes(Charset.defaultCharset());
                 BluetoothService.write(bytes);
-//                byte[] bytes = "STM:n".getBytes(Charset.defaultCharset());
-                // BluetoothService.write(bytes);
             }
 
             // Animation
@@ -1121,11 +1118,8 @@ public class Arena extends AppCompatActivity {
 
             // Bluetooth message
             if (BluetoothService.BluetoothConnectionStatus) {
-                // byte[] bytes = "STM:s100n".getBytes(Charset.defaultCharset());
                 byte[] bytes = "SB010".getBytes(Charset.defaultCharset());
                 BluetoothService.write(bytes);
-//                byte[] bytes = "STM:s".getBytes(Charset.defaultCharset());
-                // BluetoothService.write(bytes);
             }
 
             // Animation
@@ -1137,17 +1131,13 @@ public class Arena extends AppCompatActivity {
             // Log.d(TAG, "left");
 
             if (BluetoothService.BluetoothConnectionStatus) {
-                // byte[] bytes = "STM:ln".getBytes(Charset.defaultCharset());
+                // 3 point turn
                 byte[] bytes = "LF045RB045".getBytes(Charset.defaultCharset());
                 BluetoothService.write(bytes);
-//                byte[] bytes = "STM:w".getBytes(Charset.defaultCharset());
-                // BluetoothService.write(bytes);
             }
             int rotationVal = (int) ((car.getRotation() + 270) % 360);
             Log.d(TAG, "Rotating" + rotationVal);
             car.setRotation(rotationVal);
-//            leftMidButtonCommand();
-//            leftCommand();
         });
 
         ImageButton rightButton = (ImageButton) findViewById(R.id.rightButton);
@@ -1155,17 +1145,12 @@ public class Arena extends AppCompatActivity {
             // Log.d(TAG, "right");
 
             if (BluetoothService.BluetoothConnectionStatus) {
-                // byte[] bytes = "STM:rn".getBytes(Charset.defaultCharset());
                 byte[] bytes = "RF045LB045".getBytes(Charset.defaultCharset());
                 BluetoothService.write(bytes);
-//                byte[] bytes = "STM:e".getBytes(Charset.defaultCharset());
-                // BluetoothService.write(bytes);
             }
             int rotationVal = (int) ((car.getRotation() + 90) % 360);
             Log.d(TAG, "Rotating" + rotationVal);
             car.setRotation(rotationVal);
-//            rightMidButtonCommand();
-//            rightCommand();
         });
     }
 
@@ -1214,13 +1199,11 @@ public class Arena extends AppCompatActivity {
     }
 
     /*
-     * ======================
-     * For movement commands:
+     * Movement commands:
      * 0 - North
      * 1 - East
      * 2 - South
      * 3 - West
-     * ======================
      */
 
     private void forwardButtonCommand(int noOfGrids) {
@@ -1352,215 +1335,6 @@ public class Arena extends AppCompatActivity {
                 break;
         }
 
-        updateXYDirText();
-    }
-
-    /*
-     * Slide left - forward
-     */
-    public void leftSlideCommand() {
-        int orientation = (int) car.getRotation();
-        int new_x, new_y;
-        AnimatorSet animatorSet;
-        ObjectAnimator moveStraightAnimator, moveStraightAgainAnimator;
-
-        switch (((orientation / 90) % 4 + 4) % 4) {
-            case 0:
-                new_y = (int) car.getY() - 4 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            case 1:
-                new_y = (int) car.getY() - SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + 4 * SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            case 2:
-                new_y = (int) car.getY() + 4 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            case 3:
-                new_y = (int) car.getY() + SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - 4 * SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            default:
-                // Shouldn't reach this case
-                break;
-        }
-    }
-
-    /*
-     * Slide right - forward
-     */
-    private void rightSlideCommand() {
-        int orientation = (int) car.getRotation();
-        int new_x, new_y;
-        AnimatorSet animatorSet;
-        ObjectAnimator moveStraightAnimator, moveStraightAgainAnimator;
-
-        switch (((orientation / 90) % 4 + 4) % 4) {
-            case 0:
-                new_y = (int) car.getY() - 4 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            case 1:
-                new_y = (int) car.getY() + SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + 4 * SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            case 2:
-                new_y = (int) car.getY() + 4 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            case 3:
-                new_y = (int) car.getY() - SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - 4 * SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            default:
-                // Shouldn't reach this case
-                break;
-        }
         updateXYDirText();
     }
 
@@ -1803,214 +1577,6 @@ public class Arena extends AppCompatActivity {
         }
     }
 
-    /*
-     * Slide left - reverse
-     */
-    public void leftSlideReverseCommand() {
-        int orientation = (int) car.getRotation();
-        int new_x, new_y;
-        AnimatorSet animatorSet;
-        ObjectAnimator moveStraightAnimator, moveStraightAgainAnimator;
-
-        switch (((orientation / 90) % 4 + 4) % 4) {
-            case 0:
-                new_y = (int) car.getY() + 4 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            case 1:
-                new_y = (int) car.getY() - SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - 4 * SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            case 2:
-                new_y = (int) car.getY() - 4 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            case 3:
-                new_y = (int) car.getY() + SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + 4 * SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            default:
-                // Shouldn't reach this case
-                break;
-        }
-    }
-
-    /*
-     * Slide right - reverse
-     */
-    private void rightSlideReverseCommand() {
-        int orientation = (int) car.getRotation();
-        int new_x, new_y;
-        AnimatorSet animatorSet;
-        ObjectAnimator moveStraightAnimator, moveStraightAgainAnimator;
-
-        switch (((orientation / 90) % 4 + 4) % 4) {
-            case 0:
-                new_y = (int) car.getY() + 4 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            case 1:
-                new_y = (int) car.getY() + SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - 4 * SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            case 2:
-                new_y = (int) car.getY() - 4 * SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() - SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            case 3:
-                new_y = (int) car.getY() - SNAP_GRID_INTERVAL;
-                new_x = (int) car.getX() + 4 * SNAP_GRID_INTERVAL;
-
-                moveStraightAnimator = ObjectAnimator.ofFloat(car, "x", new_x);
-                moveStraightAnimator.setDuration(ANIMATOR_DURATION);
-
-                moveStraightAgainAnimator = ObjectAnimator.ofFloat(car, "y", new_y);
-                moveStraightAgainAnimator.setDuration(ANIMATOR_DURATION);
-
-                animatorSet = new AnimatorSet();
-                animatorSet.playSequentially(moveStraightAnimator, moveStraightAgainAnimator);
-                animatorSet.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        car.setY(new_y);
-                        car.setX(new_x);
-                        updateXYDirText();
-                    }
-                });
-                animatorSet.start();
-                break;
-            default:
-                // Shouldn't reach this case
-                break;
-        }
-        updateXYDirText();
-    }
 
     /*
      * reverse left
@@ -2518,209 +2084,6 @@ public class Arena extends AppCompatActivity {
         // Toast.makeText(Arena.this, "Preset 1 Applied", Toast.LENGTH_SHORT).show();
 //    }
 
-    public String[][] savedPreset = {};
-
-    private void setPreset2Button() {
-        if (savedPreset.length == 0) {
-            Toast.makeText(this, "No saved preset found", Toast.LENGTH_SHORT).show();
-        } else {
-            String[] obstacle1data = savedPreset[0];
-            obstacle1.setX(Integer.parseInt(obstacle1data[0]));
-            obstacle1.setY(Integer.parseInt(obstacle1data[1]));
-            Log.d(TAG, "Obstacle1 should be at " + obstacle1data[0] + "," + obstacle1data[1]);
-            switch (obstacle1data[2]) {
-                case ("N"):
-                    obstacle1.setRotation(0);
-                    obstacle1.setImageResource(Helper.resources.get("o1n"));
-                    break;
-                case ("E"):
-                    obstacle1.setRotation(90);
-                    obstacle1.setImageResource(Helper.resources.get("o1e"));
-                    break;
-                case ("S"):
-                    obstacle1.setRotation(180);
-                    obstacle1.setImageResource(Helper.resources.get("o1s"));
-                    break;
-                case ("W"):
-                    obstacle1.setRotation(270);
-                    obstacle1.setImageResource(Helper.resources.get("o1w"));
-                    break;
-                default:
-                    break;
-            }
-            String[] obstacle2data = savedPreset[1];
-            obstacle2.setX(Integer.parseInt(obstacle2data[0]));
-            obstacle2.setY(Integer.parseInt(obstacle2data[1]));
-            Log.d(TAG, "obstacle2 should be at " + obstacle2data[0] + "," + obstacle2data[1]);
-            switch (obstacle2data[2]) {
-                case ("N"):
-                    obstacle2.setRotation(0);
-                    obstacle2.setImageResource(Helper.resources.get("o2n"));
-                    break;
-                case ("E"):
-                    obstacle2.setRotation(90);
-                    obstacle2.setImageResource(Helper.resources.get("o2e"));
-                    break;
-                case ("S"):
-                    obstacle2.setRotation(180);
-                    obstacle2.setImageResource(Helper.resources.get("o2s"));
-                    break;
-                case ("W"):
-                    obstacle2.setRotation(270);
-                    obstacle2.setImageResource(Helper.resources.get("o2w"));
-                    break;
-                default:
-                    break;
-            }
-            String[] obstacle3data = savedPreset[2];
-            obstacle3.setX(Integer.parseInt(obstacle3data[0]));
-            obstacle3.setY(Integer.parseInt(obstacle3data[1]));
-            Log.d(TAG, "obstacle3 should be at " + obstacle3data[0] + "," + obstacle3data[1]);
-            switch (obstacle3data[2]) {
-                case ("N"):
-                    obstacle3.setRotation(0);
-                    obstacle3.setImageResource(Helper.resources.get("o3n"));
-                    break;
-                case ("E"):
-                    obstacle3.setRotation(90);
-                    obstacle3.setImageResource(Helper.resources.get("o3e"));
-                    break;
-                case ("S"):
-                    obstacle3.setRotation(180);
-                    obstacle3.setImageResource(Helper.resources.get("o3s"));
-                    break;
-                case ("W"):
-                    obstacle3.setRotation(270);
-                    obstacle3.setImageResource(Helper.resources.get("o3w"));
-                    break;
-                default:
-                    break;
-            }
-            String[] obstacle4data = savedPreset[3];
-            obstacle4.setX(Integer.parseInt(obstacle4data[0]));
-            obstacle4.setY(Integer.parseInt(obstacle4data[1]));
-            Log.d(TAG, "obstacle4 should be at " + obstacle4data[0] + "," + obstacle4data[1]);
-            switch (obstacle4data[2]) {
-                case ("N"):
-                    obstacle4.setRotation(0);
-                    obstacle4.setImageResource(Helper.resources.get("o4n"));
-                    break;
-                case ("E"):
-                    obstacle4.setRotation(90);
-                    obstacle4.setImageResource(Helper.resources.get("o4e"));
-                    break;
-                case ("S"):
-                    obstacle4.setRotation(180);
-                    obstacle4.setImageResource(Helper.resources.get("o4s"));
-                    break;
-                case ("W"):
-                    obstacle4.setRotation(270);
-                    obstacle4.setImageResource(Helper.resources.get("o4w"));
-                    break;
-                default:
-                    break;
-            }
-            String[] obstacle5data = savedPreset[4];
-            obstacle5.setX(Integer.parseInt(obstacle5data[0]));
-            obstacle5.setY(Integer.parseInt(obstacle5data[1]));
-            Log.d(TAG, "obstacle5 should be at " + obstacle5data[0] + "," + obstacle5data[1]);
-            switch (obstacle5data[2]) {
-                case ("N"):
-                    obstacle5.setRotation(0);
-                    obstacle5.setImageResource(Helper.resources.get("o5n"));
-                    break;
-                case ("E"):
-                    obstacle5.setRotation(90);
-                    obstacle5.setImageResource(Helper.resources.get("o5e"));
-                    break;
-                case ("S"):
-                    obstacle5.setRotation(180);
-                    obstacle5.setImageResource(Helper.resources.get("o5s"));
-                    break;
-                case ("W"):
-                    obstacle5.setRotation(270);
-                    obstacle5.setImageResource(Helper.resources.get("o5w"));
-                    break;
-                default:
-                    break;
-            }
-            String[] obstacle6data = savedPreset[5];
-            obstacle6.setX(Integer.parseInt(obstacle6data[0]));
-            obstacle6.setY(Integer.parseInt(obstacle6data[1]));
-            Log.d(TAG, "obstacle6 should be at " + obstacle6data[0] + "," + obstacle6data[1]);
-            switch (obstacle6data[2]) {
-                case ("N"):
-                    obstacle6.setRotation(0);
-                    obstacle6.setImageResource(Helper.resources.get("o6n"));
-                    break;
-                case ("E"):
-                    obstacle6.setRotation(90);
-                    obstacle6.setImageResource(Helper.resources.get("o6e"));
-                    break;
-                case ("S"):
-                    obstacle6.setRotation(180);
-                    obstacle6.setImageResource(Helper.resources.get("o6s"));
-                    break;
-                case ("W"):
-                    obstacle6.setRotation(270);
-                    obstacle6.setImageResource(Helper.resources.get("o6w"));
-                    break;
-                default:
-                    break;
-            }
-            String[] obstacle7data = savedPreset[6];
-            obstacle7.setX(Integer.parseInt(obstacle7data[0]));
-            obstacle7.setY(Integer.parseInt(obstacle7data[1]));
-            Log.d(TAG, "obstacle7 should be at " + obstacle7data[0] + "," + obstacle7data[1]);
-            switch (obstacle7data[2]) {
-                case ("N"):
-                    obstacle7.setRotation(0);
-                    obstacle7.setImageResource(Helper.resources.get("o7n"));
-                    break;
-                case ("E"):
-                    obstacle7.setRotation(90);
-                    obstacle7.setImageResource(Helper.resources.get("o7e"));
-                    break;
-                case ("S"):
-                    obstacle7.setRotation(180);
-                    obstacle7.setImageResource(Helper.resources.get("o7s"));
-                    break;
-                case ("W"):
-                    obstacle7.setRotation(270);
-                    obstacle7.setImageResource(Helper.resources.get("o7w"));
-                    break;
-                default:
-                    break;
-            }
-            String[] obstacle8data = savedPreset[7];
-            obstacle8.setX(Integer.parseInt(obstacle8data[0]));
-            obstacle8.setY(Integer.parseInt(obstacle8data[1]));
-            Log.d(TAG, "obstacle8 should be at " + obstacle8data[0] + "," + obstacle8data[1]);
-            switch (obstacle8data[2]) {
-                case ("N"):
-                    obstacle8.setRotation(0);
-                    obstacle8.setImageResource(Helper.resources.get("o8n"));
-                    break;
-                case ("E"):
-                    obstacle8.setRotation(90);
-                    obstacle8.setImageResource(Helper.resources.get("o8e"));
-                    break;
-                case ("S"):
-                    obstacle8.setRotation(180);
-                    obstacle8.setImageResource(Helper.resources.get("o8s"));
-                    break;
-                case ("W"):
-                    obstacle8.setRotation(270);
-                    obstacle8.setImageResource(Helper.resources.get("o8w"));
-                    break;
-                default:
-                    break;
-            }
-
-            Toast.makeText(this, "Preset 2 Applied", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private void toggleSetMode() {
         canSetObstacles = !canSetObstacles;
         if (curMode.equals("IDLE")) {
@@ -2731,119 +2094,6 @@ public class Arena extends AppCompatActivity {
             curMode = "IDLE";
             setButton.setText("Set");
             // Toast.makeText(this, "Obstacles set", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void setObstacles(String[] obstaclesPreset) {
-        if (obstaclesPreset.length == 0) {
-            Toast.makeText(this, "No saved preset found", Toast.LENGTH_SHORT).show();
-        } else {
-            for (int i = 0; i < obstaclesPreset.length; i++) {
-                int obstaclenum = i + 1;
-                String[] obsdata = obstaclesPreset[i].split(",");
-                Log.d(TAG, "Obstacle preset length is " + obstaclesPreset.length);
-                Log.d(TAG, "obstacle " + obstaclenum + " data is " + Arrays.toString(obsdata));
-
-                obstacles.get(obstaclenum).setX(Integer.parseInt(obsdata[0]) * 40);
-                obstacles.get(obstaclenum).setY(Integer.parseInt(obsdata[1]) * 40);
-                switch (obsdata[2]) {
-                    case ("N"):
-                        obstacles.get(obstaclenum).setRotation(0);
-                        obstacles.get(obstaclenum).setImageResource(Helper.resources.get("o" + obstaclenum + "n"));
-                        break;
-                    case ("E"):
-                        obstacles.get(obstaclenum).setRotation(90);
-                        obstacles.get(obstaclenum).setImageResource(Helper.resources.get("o" + obstaclenum + "e"));
-                        break;
-                    case ("S"):
-                        obstacles.get(obstaclenum).setRotation(180);
-                        obstacles.get(obstaclenum).setImageResource(Helper.resources.get("o" + obstaclenum + "s"));
-                        break;
-                    case ("W"):
-                        obstacles.get(obstaclenum).setRotation(270);
-                        obstacles.get(obstaclenum).setImageResource(Helper.resources.get("o" + obstaclenum + "w"));
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-
-//    private void sendObstacles() {
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder
-//                .append("ALG:")
-//                .append(getObstacleString(obstacle1) + "0;")
-//                .append(getObstacleString(obstacle2) + "1;")
-//                .append(getObstacleString(obstacle3) + "2;")
-//                .append(getObstacleString(obstacle4) + "3;")
-//                .append(getObstacleString(obstacle5) + "4;")
-//                .append(getObstacleString(obstacle6) + "5;")
-//                .append(getObstacleString(obstacle7) + "6;")
-//                .append(getObstacleString(obstacle8) + "7;");
-//        Log.d(TAG, stringBuilder.toString());
-//
-//        if (BluetoothService.BluetoothConnectionStatus) {
-//            byte[] bytes = stringBuilder.toString().getBytes(Charset.defaultCharset());
-//            BluetoothService.write(bytes);
-//            Toast.makeText(Arena.this, "Obstacles sent", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-    /*
-     * Returns 2-D array of obstacles in [x, y, direction] format
-     */
-    private String[][] savedObstacles() {
-        String[][] savedPreset = { getObstacleLocation(obstacle1).split(","), getObstacleLocation(obstacle2).split(","),
-                getObstacleLocation(obstacle3).split(","),
-                getObstacleLocation(obstacle4).split(","), getObstacleLocation(obstacle5).split(","),
-                getObstacleLocation(obstacle6).split(","),
-                getObstacleLocation(obstacle7).split(","), getObstacleLocation(obstacle8).split(",") };
-        // {1,2,N,2,3,E}
-        Log.d(TAG, "Saved obstacle data: " + savedPreset);
-        return savedPreset;
-    }
-
-    /*
-     * Get obstacle location in <x, y, direction> format
-     */
-    private String getObstacleLocation(ImageView obstacle) {
-        return (int) obstacle.getX() + "," + (int) obstacle.getY() + "," + getImageOrientation(obstacle);
-    }
-
-    /*
-     * Get obstacle location in <x, y, direction> format
-     * NOTE: 19 because grid is only 20 x 20
-     */
-    private String getObstacleString(ImageView obstacle) {
-        int x = (int) obstacle.getX() / SNAP_GRID_INTERVAL;
-        int y = (int) obstacle.getY() / SNAP_GRID_INTERVAL;
-        // (0,0) starts from top left hence invert y
-        int new_y = 20 - y - 1;
-        Log.d(TAG, "Obstacle at " + x + "," + new_y);
-
-        if (x > 19 || new_y > 19) {
-            return "";
-        } else {
-            return x + "," + new_y
-                    + ","
-                    + getImageOrientation(obstacle) + ",";
-        }
-    }
-
-    private String getImageOrientation(ImageView obstacle) {
-        switch (((int) ((obstacle.getRotation() / 90) % 4 + 4) % 4)) {
-            case 0:
-                return "N";
-            case 1:
-                return "E";
-            case 2:
-                return "S";
-            case 3:
-                return "W";
-            default:
-                return "X";
         }
     }
 
@@ -2927,7 +2177,7 @@ public class Arena extends AppCompatActivity {
             String message = intent.getStringExtra("receivedMessage");
             String command;
             String old = showReceived.getText().toString();
-            showReceived.setText(old + "\n[ROBOT]:  " + message);
+            showReceived.setText(old + "\nROBOT:  " + message);
             Log.d(TAG, "Received message: " + message);
 
             try {
@@ -3024,21 +2274,13 @@ public class Arena extends AppCompatActivity {
                         } else {
                             msg = message.substring(message.indexOf(',') + 1);
                         }
-                        if (message.contains("STOPPED")) {
+                        if (message.contains("COMPLETED")) {
                             Chronometer IRTimer = (Chronometer) findViewById(R.id.IRTimer);
                             IRTimer.stop();
                             updateStatusWindow("IR Completed");
                         } else {
                             updateStatusWindow(msg);
                         }
-                        break;
-
-                    // plot obstacles
-                    case Helper.PLOT:
-                        String receivedmsg = message.substring(message.indexOf(",") + 1); // string after PLOT,
-                        String[] obstaclesPreset = receivedmsg.split(";"); // create 2d array for obstacle data\
-                        Log.d(TAG, "Obstacle data is " + Arrays.toString(obstaclesPreset));
-                        setObstacles(obstaclesPreset);
                         break;
 
                     // commands from RPI
@@ -3064,18 +2306,6 @@ public class Arena extends AppCompatActivity {
                                 convertedDistance = Integer.parseInt(distance) / 10;
                                 reverseButtonCommand(convertedDistance);
                                 break;
-                            // Left
-                            case "ML":
-                                rotationVal = (int) ((car.getRotation()+270)%360);
-                                Log.d(TAG, "Rotating" + rotationVal);
-                                car.setRotation(rotationVal);
-                                break;
-                            // Right
-                            case "MR":
-                                rotationVal = (int) ((car.getRotation()+90)%360);
-                                Log.d(TAG, "Rotating" + rotationVal);
-                                car.setRotation(rotationVal);
-                                break;
                             // right forward
                             case "RF":
                                 //Angle not distance
@@ -3083,6 +2313,7 @@ public class Arena extends AppCompatActivity {
                                 Log.d(TAG, prefix + ";" + convertedDistance);
                                 switch(convertedDistance) {
                                     case 4:
+                                        // 3 point turn
                                         rotationVal = (int) ((car.getRotation() + 90) % 360);
                                         Log.d(TAG, "Rotating" + rotationVal);
                                         car.setRotation(rotationVal);
@@ -3102,6 +2333,7 @@ public class Arena extends AppCompatActivity {
                                 Log.d(TAG, prefix + ";" + convertedDistance);
                                 switch(convertedDistance) {
                                     case 4:
+                                        // 3 point turn
                                         break;
 //                                    case 9:
 //                                        rightMidButtonCommand();
@@ -3117,6 +2349,7 @@ public class Arena extends AppCompatActivity {
                                 Log.d(TAG, prefix + ";" + convertedDistance);
                                 switch(convertedDistance) {
                                     case 4:
+                                        // 3 point turn
                                         rotationVal = (int) ((car.getRotation() + 270) % 360);
                                         Log.d(TAG, "Rotating" + rotationVal);
                                         car.setRotation(rotationVal);
@@ -3137,6 +2370,7 @@ public class Arena extends AppCompatActivity {
                                 Log.d(TAG, prefix + ";" + convertedDistance);
                                 switch(convertedDistance) {
                                     case 4:
+                                        // 3 point turn
                                         break;
 //                                    case 9:
 //                                        rightMidButtonCommand();
@@ -3144,22 +2378,6 @@ public class Arena extends AppCompatActivity {
                                     default:
                                         leftMidReverseButtonCommand();
                                 }
-                                break;
-                            // slide right forward
-                            case "JF":
-                                rightSlideCommand();
-                                break;
-                            // slide right backward
-                            case "JB":
-                                rightSlideReverseCommand();
-                                break;
-                            // slide left forward
-                            case "KF":
-                                leftSlideCommand();
-                                break;
-                            // slide left backward
-                            case "KB":
-                                leftSlideReverseCommand();
                                 break;
                         }
                     default:

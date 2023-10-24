@@ -19,14 +19,14 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import java.nio.charset.Charset;
 
 public class Communication extends AppCompatActivity {
-    private static final String TAG = "Communication->DEBUG";
+    private static final String TAG = "Communication:DEBUG";
     TextView showReceived;
     BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String message = intent.getStringExtra("receivedMessage");
             String old = showReceived.getText().toString();
-            showReceived.setText(old + "\n[ROBOT]:  " + message);
+            showReceived.setText(old + "\nROBOT:  " + message);
         }
     };
 
@@ -34,7 +34,7 @@ public class Communication extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.communication);
-        Log.d(TAG, "I'm created!");
+        Log.d(TAG, "Created!");
 
         Button sendButton = (Button) this.findViewById(R.id.send_message_btn);
         LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver, new IntentFilter("incomingMessage"));
@@ -49,7 +49,7 @@ public class Communication extends AppCompatActivity {
                     byte[] bytes = message.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
                     String old = showReceived.getText().toString();
-                    showReceived.setText(old + "\n[TABLET]:  " + message);
+                    showReceived.setText(old + "\nTABLET:  " + message);
                 } else {
                     Toast.makeText(Communication.this, "Please connect to Bluetooth!", Toast.LENGTH_SHORT).show();
                 }

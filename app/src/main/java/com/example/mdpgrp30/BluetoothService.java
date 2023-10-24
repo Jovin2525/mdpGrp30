@@ -276,7 +276,7 @@ public class BluetoothService {
     public static void write(byte[] out){
         ConnectedThread tmp;
 
-        Log.d(TAG, "write: Write is called." );
+        Log.d(TAG, "write: Write called." );
         mConnectedThread.write(out);
     }
 }
