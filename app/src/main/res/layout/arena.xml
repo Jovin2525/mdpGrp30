@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor">
 
-    <com.example.mdpgrp30.CanvasGrid
+    <com.example.branchmdpgrp30.CanvasGrid
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -183,7 +183,7 @@
             android:fontFamily="@font/jockey_one_regular"
             android:paddingHorizontal="15dp"
             android:paddingVertical="12dp"
-            android:text="IR"
+            android:text="Task 1"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@id/chatlog_tv"
@@ -195,7 +195,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="164dp"
-            android:backgroundTint="#FFA500"
+            android:backgroundTint="@color/setButtonColor"
             android:fontFamily="@font/jockey_one_regular"
             android:paddingHorizontal="15dp"
             android:paddingVertical="12dp"
@@ -214,27 +214,11 @@
             android:fontFamily="@font/jockey_one_regular"
             android:paddingHorizontal="15dp"
             android:paddingVertical="12dp"
-            android:text="SP"
+            android:text="Task 2"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/IRButton"
             app:layout_constraintStart_toEndOf="@+id/IRButton" />
-
-<!--        <Button-->
-<!--            android:id="@+id/preset1Button"-->
-<!--            android:layout_width="95dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_marginTop="228dp"-->
-<!--            android:backgroundTint="#000000"-->
-<!--            android:fontFamily="@font/jockey_one_regular"-->
-<!--            android:paddingHorizontal="15dp"-->
-<!--            android:paddingVertical="12dp"-->
-<!--            android:text="Load Preset"-->
-<!--            android:textColor="#FFFFFF"-->
-<!--            android:textSize="19sp"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/guideline3" />-->
 
         <TextView
             android:id="@+id/chatlog_tv"
@@ -252,26 +236,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
-<!--        <Button-->
-<!--            android:id="@+id/saveButton"-->
-<!--            android:layout_width="95dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="12dp"-->
-<!--            android:backgroundTint="#000000"-->
-<!--            android:fontFamily="@font/jockey_one_regular"-->
-<!--            android:paddingHorizontal="15dp"-->
-<!--            android:paddingVertical="12dp"-->
-<!--            android:text="Save"-->
-<!--            android:textColor="#FFFFFF"-->
-<!--            android:textSize="20sp"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/preset1Button"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/IRButton" />-->
-
         <Button
             android:id="@+id/resetButton"
             android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#dc4048"
+            android:backgroundTint="@color/resetButtonColor"
             android:fontFamily="@font/jockey_one_regular"
             android:paddingHorizontal="14dp"
             android:paddingVertical="12dp"
@@ -304,7 +273,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/jockey_one_regular"
             android:text="Robot Status:"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
@@ -330,7 +299,7 @@
             android:layout_marginStart="16dp"
             android:fontFamily="@font/jockey_one_regular"
             android:text="Direction:"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView7"
             app:layout_constraintStart_toEndOf="@+id/textView7" />
@@ -343,7 +312,7 @@
             android:layout_marginTop="-4dp"
             android:fontFamily="@font/jockey_one_regular"
             android:text="("
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statusWindowTitle" />
@@ -355,7 +324,7 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/jockey_one_regular"
             android:text="0"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
             app:layout_constraintStart_toEndOf="@+id/textView3" />
@@ -368,7 +337,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/jockey_one_regular"
             android:text=","
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="@+id/x_tv"
             app:layout_constraintStart_toEndOf="@+id/x_tv" />
@@ -380,7 +349,7 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/jockey_one_regular"
             android:text="0"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="@+id/comma"
             app:layout_constraintStart_toEndOf="@+id/comma" />
@@ -392,7 +361,7 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/jockey_one_regular"
             android:text=")"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="@+id/y_tv"
             app:layout_constraintStart_toEndOf="@+id/y_tv" />
@@ -404,7 +373,7 @@
             android:layout_marginStart="6dp"
             android:fontFamily="@font/jockey_one_regular"
             android:text="None"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintStart_toEndOf="@+id/textView9" />
@@ -415,7 +384,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />

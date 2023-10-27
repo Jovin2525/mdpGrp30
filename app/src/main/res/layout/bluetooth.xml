@@ -48,7 +48,7 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/jockey_one_regular"
         android:text="Bluetooth"
-        android:textColor="@color/black"
+        android:textColor="@color/text_color"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -61,7 +61,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/jockey_one_regular"
         android:text="MDP Group 30"
-        android:textColor="@color/black"
+        android:textColor="@color/text_color"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -74,10 +74,10 @@
         android:layout_marginTop="28dp"
         android:buttonTint="#404252"
         android:fontFamily="@font/jockey_one_regular"
-        android:text="On"
-        android:textColor="@color/black"
+        android:text="OFF"
+        android:textColor="@color/text_color"
         android:textSize="20sp"
-        android:thumbTint="#404252"
+        android:thumbTint="#962730"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -106,7 +106,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/jockey_one_regular"
         android:text="Paired Devices"
-        android:textColor="@color/black"
+        android:textColor="@color/text_color"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scanButton" />
@@ -135,7 +135,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/jockey_one_regular"
         android:text="Devices Found"
-        android:textColor="@color/black"
+        android:textColor="@color/text_color"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pairedDevicesListView" />

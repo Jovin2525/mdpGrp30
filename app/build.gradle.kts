@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.mdpgrp30"
+    namespace = "com.example.branchmdpgrp30"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.example.mdpgrp30"
+        applicationId = "com.example.branchmdpgrp30"
         minSdk = 30
         targetSdk = 33
         versionCode = 1
